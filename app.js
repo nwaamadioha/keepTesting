@@ -5,7 +5,7 @@ dotenv.config();
 
 const app = express();
 
- mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true});
+ mongoose.connect('process.env.MONGO_DB_URI');
  mongoose.connection.once('open', function(){
     console.log('Conection has been made!');
   }).on('error', function(error){
