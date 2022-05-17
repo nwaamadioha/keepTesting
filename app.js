@@ -5,12 +5,13 @@ dotenv.config();
 
 const app = express();
 
- mongoose.connect('process.env.MONGO_DB_URI', { useMongoClient:true });
- mongoose.connection.once('open', function(){
+const uri = process.env.MONGODB_URI;
+mongoose.connect(uri);
+mongoose.connection.once('open', function(){
     console.log('Conection has been made!');
-  }).on('error', function(error){
-      console.log('Error is: ', error);
-  });
+}).on('error', function(error){
+    console.log('Error is: ', error);
+});
 
 
 
