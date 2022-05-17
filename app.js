@@ -5,15 +5,12 @@ dotenv.config();
 
 const app = express();
 
-const connect = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_DB_URI);
-        console.log("Connected to mongoDB");
-    } catch (error) {
-        throw error;
-    }
-};
-
+ mongoose.connect(process.env.MONGO_DB_URI, {useNewUrlParser: true});
+ mongoose.connection.once('open', function(){
+    console.log('Conection has been made!');
+  }).on('error', function(error){
+      console.log('Error is: ', error);
+  });
 
 
 
@@ -26,6 +23,5 @@ app.get("/", function(req, res){
 
 
 app.listen(process.env.PORT || 3000, function(){
-    connect()
     console.log("Server started successfully !")
 });
